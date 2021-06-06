@@ -5,7 +5,7 @@ import { AppDataStore } from '../interfaces'
 
 /**
  * 1. Simple state (DONE)
- * 2. Persisted state
+ * 2. Persisted state (DONE)
  * 3. App-wide state with routing
  * 4. Persisted, app-wide state with routing
  * 5. Persisted, app-wide state with routing and Redux DevTools
