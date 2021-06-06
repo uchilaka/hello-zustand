@@ -4,8 +4,8 @@ import Alerts from './features/alerts'
 import AlertMessage from './features/alerts/models/AlertMessage';
 
 import { selectAlerts } from './features/alerts/selectors';
+import hashToArray from './features/messages/utils';
 import { useAppStore } from './store'
-import hashToArray from './features/alerts/utils';
 
 function App() {
   // @Todo we'll consume this later to update the state

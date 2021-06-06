@@ -1,25 +1,12 @@
-import { AlertMessageSeverity, IAlertMessage } from '../interfaces'
-import { GUID } from '../utils' // @Todo move to a shared library
+import { AlertMessageSeverity } from '../interfaces'
+import { CoreMessage } from '../../messages/models'
 
-export default class AlertMessage implements IAlertMessage {
-  id: string
-
-  body: string
-
-  createdAt: Date = new Date()
-
-  modifiedAt: Date = new Date()
-
+export default class AlertMessage extends CoreMessage {
   severity: AlertMessageSeverity
 
   constructor(body: string, severity = AlertMessageSeverity.INFO) {
-    this.id = GUID()
-    this.body = body
+    super(body)
     this.severity = severity
     this.touch()
-  }
-
-  private touch() {
-    this.modifiedAt = new Date()
   }
 }

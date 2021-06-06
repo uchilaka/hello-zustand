@@ -1,9 +1,9 @@
 import { IAlertMessage } from './interfaces'
-import { GUID } from './utils'
 import DayJS from 'dayjs'
 import LocalizedFormat from 'dayjs/plugin/localizedFormat' // @Todo explore publishing through formatter context
 
 import styled from 'styled-components'
+import { GUID } from '../messages/utils'
 
 DayJS.extend(LocalizedFormat)
 

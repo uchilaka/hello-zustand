@@ -1,13 +1,4 @@
-export interface AuditableObject {
-  createdAt: Date
-  modifiedAt: Date
-}
-
-export interface CoreMessage extends AuditableObject {
-  id: string
-  title?: string
-  body: string
-}
+import { CoreMessage } from "../messages/models";
 
 // eslint-disable-next-line no-shadow
 export enum AlertMessageSeverity {
