@@ -1,9 +1,10 @@
 import create from 'zustand'
+import { persist } from 'zustand/middleware'
 import { IAlertMessage } from '../features/alerts/interfaces'
 import { AppDataStore } from '../interfaces'
 
 /**
- * 1. Simple state
+ * 1. Simple state (DONE)
  * 2. Persisted state
  * 3. App-wide state with routing
  * 4. Persisted, app-wide state with routing
@@ -12,7 +13,7 @@ import { AppDataStore } from '../interfaces'
  * 7. Persisted, app-wide state with routing, Redux DevTools and data contexts, and useEffect cleanups (via zustand subscribe / unsubscribe)
  */
 
-const useStore = create<AppDataStore>(set => ({
+const appStore = persist<AppDataStore>(set => ({
   alerts: { ids: [], items: {} },
   setDestinationURL(destinationURL: string) {
     set(({ alerts }) => ({
@@ -34,6 +35,8 @@ const useStore = create<AppDataStore>(set => ({
       },
     }))
   },
-}))
+}), { name: 'AppStore', getStorage: () => localStorage })
 
-export default useStore
+const useAppStore = create<AppDataStore>(appStore)
+
+export default useAppStore
