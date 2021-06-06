@@ -3,15 +3,17 @@ import React from 'react';
 import Alerts from './features/alerts'
 import AlertMessage from './features/alerts/models/AlertMessage';
 
+import { selectAlerts } from './features/alerts/selectors';
 import { useAppStore } from './store'
+import hashToArray from './features/alerts/utils';
 
 function App() {
   // @Todo we'll consume this later to update the state
-  const store = useAppStore()
+  const appAlerts = useAppStore(selectAlerts)
+  const publishAlert = useAppStore(state => state.publishAlert)
 
   function demoAlert() {
-    const newAlert = new AlertMessage('Hello simple state!')
-    store.publishAlert(newAlert)
+    publishAlert(new AlertMessage('Hello simple state!'))
   }
 
   return (
@@ -20,7 +22,7 @@ function App() {
 
       <button onClick={demoAlert}>Pop random alert</button>
 
-      <Alerts />
+      <Alerts items={hashToArray(appAlerts)} />
     </>
   );
 }

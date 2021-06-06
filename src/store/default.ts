@@ -12,25 +12,37 @@ import { AppDataStore } from '../interfaces'
  * 7. Persisted, app-wide state with routing, Redux DevTools and data contexts, and useEffect cleanups (via zustand subscribe / unsubscribe)
  */
 
-const useStore = create<AppDataStore>(
-  (set, get) => ({
-    alerts: { ids: [], items: {} },
-    setDestinationURL(url: string) {
-      console.debug(`Will set destination URL to: ${url}`)
-    },
-    publishAlert: (newAlert: IAlertMessage) => () => set({
+const useStore = create<AppDataStore>(set => ({
+  alerts: { ids: [], items: {} },
+  setDestinationURL(url: string) {
+    console.debug(`Will set destination URL to: ${url}`)
+  },
+  publishAlert(newAlert: IAlertMessage) {
+    set(({ alerts }) => ({
       alerts: {
         ids: [
-          ...get().alerts.ids,
+          ...alerts.ids,
           newAlert.id,
         ],
         items: {
-          ...get().alerts.items,
+          ...alerts.items,
           [newAlert.id]: newAlert,
         },
       },
-    }),
-  })
-)
+    }))
+  },
+  // publishAlert: (newAlert: IAlertMessage) => set(({ alerts }) => ({
+  //   alerts: {
+  //     ids: [
+  //       ...alerts.ids,
+  //       newAlert.id,
+  //     ],
+  //     items: {
+  //       ...alerts.items,
+  //       [newAlert.id]: newAlert,
+  //     },
+  //   },
+  // })),
+}))
 
 export default useStore

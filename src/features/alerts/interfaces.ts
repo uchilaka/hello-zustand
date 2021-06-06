@@ -20,3 +20,7 @@ export enum AlertMessageSeverity {
 export interface IAlertMessage extends CoreMessage {
   severity: AlertMessageSeverity
 }
+
+export interface AlertStateSlice {
+  alerts: IAlertMessage[]
+}
