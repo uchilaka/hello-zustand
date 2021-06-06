@@ -15,6 +15,7 @@ import { AppDataStore } from '../interfaces'
 
 const appStore = persist<AppDataStore>(set => ({
   alerts: { ids: [], items: {} },
+  messages: { ids: [], items: {} },
   setDestinationURL(destinationURL: string) {
     set(({ alerts }) => ({
       alerts,

@@ -2,8 +2,10 @@ import { IAlertMessage } from './interfaces'
 import DayJS from 'dayjs'
 import LocalizedFormat from 'dayjs/plugin/localizedFormat' // @Todo explore publishing through formatter context
 
-import styled from 'styled-components'
-import { GUID } from '../messages/utils'
+import hashToArray from '../messages/utils'
+import { useAppStore } from '../../store'
+import { selectAlerts } from './selectors'
+import Alert from './components/Alert'
 
 DayJS.extend(LocalizedFormat)
 
@@ -11,29 +13,15 @@ export type AlertProps = {
   items: IAlertMessage[]
 }
 
-const AlertContainer = styled.div`
-  .timestamp, .message { 
-    display: block;
-  }
-
-  .timestamp {
-    font-size: smaller;
-    color: gray;
-  }
-`
-
 // Alert Container with formatting
 
-export default function Alerts({ items = [], }: AlertProps) {
+export default function Alerts() {
+  const alerts = useAppStore(selectAlerts)
+
   return (
     <>
       <h2>Alerts</h2>
-      {items.map(alert => (
-        <AlertContainer key={GUID('alert')}>
-          <span className="message">{alert.body}</span>
-          <span className="timestamp">{DayJS(alert.createdAt).format('LLL')}</span>
-        </AlertContainer>
-      ))}
+      {hashToArray(alerts).map(({ body, createdAt }) => <Alert body={body} createdAt={createdAt} />)}
     </>
   )
 }

@@ -1,4 +1,5 @@
 import { IAlertMessage } from "./features/alerts/interfaces";
+import { CoreMessage } from "./features/messages/models";
 
 // eslint-disable-next-line no-shadow
 export enum SupportedEnvironments {
@@ -38,6 +39,7 @@ interface AppDataHelpers {
 
 export type AppDataStore = AppDataHelpers & Record<string, unknown> & {
   alerts: StoreHash<IAlertMessage>
+  messages: StoreHash<CoreMessage>
   blockNavigation?: boolean
   destinationURL?: string
   [k: string]: unknown
