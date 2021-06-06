@@ -35,7 +35,7 @@ const appStore = persist<AppDataStore>(set => ({
       },
     }))
   },
-}), { name: 'AppStore', getStorage: () => localStorage })
+}), { name: 'AppData', getStorage: () => localStorage })
 
 const useAppStore = create<AppDataStore>(appStore)
 
