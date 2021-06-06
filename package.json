@@ -1,6 +1,6 @@
 {
   "name": "hello-persisted-state",
-  "version": "0.1.0-step1-complete",
+  "version": "0.1.0-step2-complete",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
