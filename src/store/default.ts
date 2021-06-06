@@ -14,8 +14,11 @@ import { AppDataStore } from '../interfaces'
 
 const useStore = create<AppDataStore>(set => ({
   alerts: { ids: [], items: {} },
-  setDestinationURL(url: string) {
-    console.debug(`Will set destination URL to: ${url}`)
+  setDestinationURL(destinationURL: string) {
+    set(({ alerts }) => ({
+      alerts,
+      destinationURL,
+    }))
   },
   publishAlert(newAlert: IAlertMessage) {
     set(({ alerts }) => ({
@@ -31,18 +34,6 @@ const useStore = create<AppDataStore>(set => ({
       },
     }))
   },
-  // publishAlert: (newAlert: IAlertMessage) => set(({ alerts }) => ({
-  //   alerts: {
-  //     ids: [
-  //       ...alerts.ids,
-  //       newAlert.id,
-  //     ],
-  //     items: {
-  //       ...alerts.items,
-  //       [newAlert.id]: newAlert,
-  //     },
-  //   },
-  // })),
 }))
 
 export default useStore
