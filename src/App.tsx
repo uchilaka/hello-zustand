@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Alerts from './features/alerts'
+import AlertMessage from './features/alerts/models/AlertMessage';
+
+import { useAppStore } from './store'
 
 function App() {
+  // @Todo we'll consume this later to update the state
+  const store = useAppStore()
+
+  function demoAlert() {
+    const newAlert = new AlertMessage('Hello simple state!')
+    store.publishAlert(newAlert)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Hello Persisted State</h1>
+
+      <button onClick={demoAlert}>Pop random alert</button>
+
+      <Alerts />
+    </>
   );
 }
 
